@@ -1,0 +1,13 @@
+.section-container {
+    width: 67%;
+    height: auto;
+    margin: 0 auto;
+    background: #FFFFFF;
+    margin-top: 42px;
+    padding: 96px 174px 44px 174px;
+    border-radius: 18px;
+}
+
+.form-container {
+    width: 100%;
+}

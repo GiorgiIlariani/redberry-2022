@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'HelveticaNeue';
+    src: url(./assets/font/HelveticaNeue.ttc);
+}
+
+a {
+    text-decoration: none;
+}
+
+input {
+    width: 100%;
+    border-color: #8AC0E2;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 8px 0;
+    outline: none;
+}
+
+.input-div label {
+    font-weight: 600;
+    font-size: 18px;
+    color: #000000;
+}
+
+.input-div {
+    width: 408px;
+}
+
+.input-div p {
+    font-weight: 300;
+    font-size: 14px;
+    color: #000000;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+::placeholder {
+    color: #00000099;
+    font-weight: 400;
+    font-size: 16px;
+}

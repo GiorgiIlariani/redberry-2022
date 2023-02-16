@@ -1,0 +1,21 @@
+.header {
+    display: flex;
+    justify-content: center;
+    padding-top: 91px;
+}
+
+.header h4 {
+    font-weight: 700;
+    font-size: 20px;
+    margin: 0 64px;
+    cursor: pointer;
+}
+
+
+
+
+.header a {
+    color: black;
+}
+
+
