@@ -15,11 +15,17 @@ a {
 
 input {
     width: 100%;
-    border-color: #8AC0E2;
+    border: 1.8px solid #8AC0E2;
     border-radius: 8px;
     padding: 20px;
     margin: 8px 0;
     outline: none;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.input-div {
+    width: 100%;
 }
 
 .input-div label {
@@ -28,8 +34,8 @@ input {
     color: #000000;
 }
 
-.input-div {
-    width: 408px;
+.flex-container > div {
+    width: 420px;
 }
 
 .input-div p {
@@ -45,7 +51,56 @@ input {
 }
 
 ::placeholder {
-    color: #00000099;
-    font-weight: 400;
-    font-size: 16px;
+    color: rgba(0, 0, 0, 0.6);
 }
+
+
+.section-container {
+    width: 67%;
+    height: auto;
+    margin: 0 auto;
+    background: #FFFFFF;
+    margin-top: 42px;
+    padding: 96px 174px 44px 174px;
+    border-radius: 18px;
+}
+
+/* validation */
+.invalid input {
+    border: 1px solid #b40e0e;
+    background: url('./assets/images/danger.png');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 20px);
+}
+
+.invalid input:focus {
+    border-color: #ff8800;
+    background-color: #fbe8d2;
+}
+
+.invalid label {
+    color: #b40e0e;
+}
+
+.invalid p {
+    color: #b40e0e;
+}
+
+.error-text {
+    color: #b40e0e;
+}
+
+.success input{
+    border-color: #98E37E;
+    background: url('./assets/images/success.png');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 20px);
+}
+
+/* .success-border {
+    border-color: #98E37E;
+}
+
+.danger-border {
+    border-color: #b40e0e;
+} */
