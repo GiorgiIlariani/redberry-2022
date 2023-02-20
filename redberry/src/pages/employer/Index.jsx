@@ -20,6 +20,7 @@ import useInput from "../../hooks/useInput";
 
 // mui button
 import MuiButton from "../../components/UI/muiButton/MuiButton";
+import TeamAndPositionSelects from "../../components/UI/team-position/TeamAndPositionSelects";
 
 const patterns = {
   name: /^[ა-ჰ]{2,}$/,
@@ -69,14 +70,17 @@ const Employer = () => {
     onSubmit: enteredPhoneNumberSubmited,
   } = useInput((value) => patterns.phoneNumber.test(value), "phoneNumber");
 
-  // description
-  const [enteredDescriptionValue, setEnteredDescriptionValue] = useState(
-    localStorage.getItem("description") || ""
-  );
+  // teams
+  const [teams, setTeams] = useState([]);
+  const [eachTeam, setEachTeam] = useState(localStorage.getItem("team") || "");
+  const [isTeamTouched, setIsTeamTouched] = useState(false);
 
-  // // image
-  const [image, setImage] = useState(localStorage.getItem("image") || "");
-  const [isImageTouched, setIsImageTouched] = useState(false);
+  //   positions
+  const [positions, setPositions] = useState([]);
+  const [eachPosition, setEachPosition] = useState(
+    localStorage.getItem("position") || ""
+  );
+  const [isPositionTouched, setIsPositionTouched] = useState(false);
 
   // navigate
   const navigate = useNavigate();
@@ -87,15 +91,15 @@ const Employer = () => {
     localStorage.setItem("surname", enteredSurnameValue);
     localStorage.setItem("mail", enteredMailValue);
     localStorage.setItem("phoneNumber", enteredPhoneNumberValue);
-    localStorage.setItem("description", enteredDescriptionValue);
-    localStorage.setItem("image", image);
+    localStorage.setItem("team", eachTeam);
+    localStorage.setItem("position", eachPosition);
   }, [
     enteredNameValue,
     enteredSurnameValue,
     enteredMailValue,
     enteredPhoneNumberValue,
-    enteredDescriptionValue,
-    image,
+    eachTeam,
+    eachPosition
   ]);
 
   // change background color
@@ -112,21 +116,11 @@ const Employer = () => {
     enteredSurnameSubmited(true);
     enteredMailSubmited(true);
     enteredPhoneNumberSubmited(true);
-    setIsImageTouched(true);
+    setIsTeamTouched(true);
+    setIsPositionTouched(true);
 
     if (formIsValid) {
       navigate("/laptop-options");
-    }
-  };
-
-  // image
-  const onImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      let reader = new FileReader();
-      reader.onload = (e) => {
-        setImage(e.target.result);
-      };
-      reader.readAsDataURL(e.target.files[0]);
     }
   };
 
@@ -137,8 +131,7 @@ const Employer = () => {
     enteredMailIsValid &&
     enteredSurnameIsValid &&
     enteredMailIsValid &&
-    enteredPhoneNumberIsValid &&
-    image
+    enteredPhoneNumberIsValid
   ) {
     formIsValid = true;
   }
@@ -180,37 +173,19 @@ const Employer = () => {
               <p>მინიმუმ ორი სიმბოლო, ქართული ასოები</p>
             </div>
           </div>
-          {/* upload image */}
-          <div className={classes["upload-photo"]}>
-            <span>პირადი ფოტოს ატვირთვა</span>
-            <label htmlFor="upload-img">
-              ატვირთვა
-              <input
-                type="file"
-                id="upload-img"
-                name="upload-img"
-                onChange={onImageChange}
-              />
-            </label>
-            {image !== "" ? (
-              <img
-                src="./assets/images/success.png"
-                className={classes.photo}
-                alt="success"
-              />
-            ) : isImageTouched && image === "" ? (
-              <img src="./assets/images/danger.png" alt="danger" />
-            ) : null}
-          </div>
-          {/* textarea */}
-          <div className={classes.textarea}>
-            <label htmlFor="aboutMe">ჩემ შესახებ (არასავალდებულო)</label>
-            <textarea
-              name="aboutMe"
-              value={enteredDescriptionValue}
-              onChange={(e) => setEnteredDescriptionValue(e.target.value)}
-              placeholder="ზოგადი ინფო შენს შესახებ"></textarea>
-          </div>
+          {/* team an position */}
+          <TeamAndPositionSelects
+            teams={teams}
+            setTeams={setTeams}
+            eachTeam={eachTeam}
+            setEachTeam={setEachTeam}
+            setEachPosition={setEachPosition}
+            isTeamTouched={isTeamTouched}
+            positions={positions}
+            eachPosition={eachPosition}
+            setPositions={setPositions}
+            isPositionTouched={isPositionTouched}
+          />
           {/* email */}
           <div className={mailInputClasses} id={classes.mail}>
             <label htmlFor="mail">მეილი</label>
@@ -256,3 +231,14 @@ const Employer = () => {
 };
 
 export default Employer;
+
+// // image
+// const onImageChange = (e) => {
+//   if (e.target.files && e.target.files[0]) {
+//     let reader = new FileReader();
+//     reader.onload = (e) => {
+//       setImage(e.target.result);
+//     };
+//     reader.readAsDataURL(e.target.files[0]);
+//   }
+// };

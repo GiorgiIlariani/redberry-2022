@@ -5,18 +5,11 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-const Cpu = () => {
+const Cpu = (props) => {
   const [dropdownValues, setDropdownValues] = useState([]);
-  const [eachCpuValue, setEachCpuValue] = useState(
-    localStorage.getItem("eachCpuValue") || ""
-  );
-
-  useEffect(() => {
-    localStorage.setItem("eachCpuValue", eachCpuValue);
-  }, [eachCpuValue]);
 
   const handleChange = (e) => {
-    setEachCpuValue(e.target.value);
+    props.setEachCpuValue(e.target.value);
   };
 
   useEffect(() => {
@@ -28,16 +21,22 @@ const Cpu = () => {
     fetchCpus();
   }, []);
 
+  const hasError = props.isCpuTouched && props.eachCpuValue === "";
+
   return (
     <>
-      <FormControl sx={{ mt: 1 }}>
+      <FormControl sx={{ mt: 1 }} error={hasError}>
         <InputLabel id="multiple-cpu">აირჩიეთ CPU</InputLabel>
         <Select
-          sx={{ backgroundColor: "#EBEBEB" }}
+          sx={{
+            backgroundColor: "#EBEBEB",
+            boxShadow: "none",
+            ".MuiOutlinedInput-notchedOutline": { border: 0 },
+          }}
           labelId="multiple-cpu"
           id="multiple-cpu"
           defaultValue=""
-          value={eachCpuValue}
+          value={props.eachCpuValue}
           onChange={handleChange}
           input={<OutlinedInput label="აირჩიეთ CPU" />}>
           {dropdownValues.data !== undefined &&
@@ -55,5 +54,3 @@ const Cpu = () => {
 };
 
 export default Cpu;
-
-

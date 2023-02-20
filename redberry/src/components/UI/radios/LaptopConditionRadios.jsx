@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 // mui
 import { FormControlLabel, RadioGroup, Radio } from "@mui/material";
 
-const Radios = ({ firstValue, secondValue }) => {
+const LaptopConditionRadios = ({
+  enteredLaptopCondition,
+  setEnteredLaptopCondition,
+}) => {
   return (
-    <RadioGroup row>
+    <RadioGroup
+      row
+      value={enteredLaptopCondition}
+      onChange={(e) => setEnteredLaptopCondition(e.target.value)}>
       <FormControlLabel
-        value={firstValue}
         control={
           <Radio
+            value="ახალი"
             sx={{
               "&, &.Mui-checked": {
                 color: "#4D9AC3",
@@ -17,12 +23,12 @@ const Radios = ({ firstValue, secondValue }) => {
             }}
           />
         }
-        label={firstValue}
+        label="ახალი"
       />
       <FormControlLabel
-        value={secondValue}
         control={
           <Radio
+            value="მეორადი"
             sx={{
               "&, &.Mui-checked": {
                 color: "#4D9AC3",
@@ -31,10 +37,10 @@ const Radios = ({ firstValue, secondValue }) => {
             }}
           />
         }
-        label={secondValue}
+        label="მეორადი"
       />
     </RadioGroup>
   );
 };
 
-export default Radios;
+export default LaptopConditionRadios

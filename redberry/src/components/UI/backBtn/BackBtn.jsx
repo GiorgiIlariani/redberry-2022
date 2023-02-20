@@ -4,9 +4,9 @@ import classes from "./BackBtn.module.css";
 
 const BackBtn = () => {
   return (
-    <div className={classes.backBtn}>
+    <button className={classes.backBtn} onClick={() => localStorage.clear()}>
       <img src="./assets/images/backLogo.png" alt="go back" />
-    </div>
+    </button>
   );
 };
 

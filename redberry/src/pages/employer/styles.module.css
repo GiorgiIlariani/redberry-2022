@@ -4,7 +4,7 @@
 
 /* upload photo */
 
-.upload-photo {
+/* .upload-photo {
     margin-top: 54px;
     display: flex;
     align-items: center;
@@ -57,7 +57,7 @@
     font-weight: 600;
     font-size: 18px;
     color: #000000;
-}
+} */
 
 #mail {
     margin-top: 50px;
@@ -77,4 +77,6 @@
     justify-content: center;
     margin: 67px 0 45px 0;
 }
+
+
 

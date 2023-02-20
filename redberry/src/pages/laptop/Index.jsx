@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 // costum hook
 import useInput from "../../hooks/useInput";
@@ -7,7 +7,7 @@ import useInput from "../../hooks/useInput";
 import classes from "./styles.module.css";
 
 //router link
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // backBtn
 import BackBtn from "../../components/UI/backBtn/BackBtn";
@@ -21,15 +21,38 @@ import Header from "../../components/header/Header";
 // import brands
 import LaptopBrands from "../../components/UI/laptopBrands/LaptopBrands";
 import Cpu from "../../components/UI/cpu/Cpu";
-import Radios from "../../components/UI/radios/Radios";
+import MemoryTypeRadio from "../../components/UI/radios/MemoryTypeRadio";
 import { Button } from "@mui/material";
+import LaptopConditionRadios from "../../components/UI/radios/LaptopConditionRadios";
 
 const patterns = {
   leptopName: /^[a-zA-Z0-9!@#$%^&*()_+=]{1,}$/,
   onlyNumbers: /^[0-9]{1,}$/,
 };
 
-const LaptopOptions = () => {
+const LaptopOptions = (props) => {
+  //  change background color
+  useEffect(() => {
+    document.body.style.backgroundColor = "#F6F6F6";
+  }, []);
+
+  const [image, setImage] = useState(
+    localStorage.getItem("computerImage") || null
+  );
+  const [isImageTouched, setIsImageTouched] = useState(false);
+
+  if (image === "null") {
+    setImage(null);
+  }
+
+  let isImageValid = image !== null;
+
+  // brand touched
+  const [isBrandsTouched, setIsBrandsTouched] = useState(false);
+
+  // cpu touched
+  const [isCpuTouched, setIsCpuTouched] = useState(false);
+
   // laptop name
   const {
     value: enteredLaptopNameValue,
@@ -62,42 +85,141 @@ const LaptopOptions = () => {
 
   // laptop ram
   const {
-    value: enteredLeptopRamValue,
-    isValid: enteredLeptopRamIsValid, // is form valid?
-    valueChangeHandler: leptopRamInputChangedHandler,
-    inputBlurHandler: leptopRamInputBlurHandler,
-    inputClasses: leptopRamInputClasses,
-    onSubmit: enteredLeptopRamSubmited,
+    value: enteredLaptopRamValue,
+    isValid: enteredLaptopRamIsValid, // is form valid?
+    valueChangeHandler: laptopRamInputChangedHandler,
+    inputBlurHandler: laptopRamInputBlurHandler,
+    inputClasses: laptopRamInputClasses,
+    onSubmit: enteredLaptopRamSubmited,
   } = useInput((value) => patterns.onlyNumbers.test(value), "laptopRam");
+
+  // price of the laptop
+  const {
+    value: enteredLaptopPriceValue,
+    isValid: enteredLaptopPriceIsValid, // is form valid?
+    valueChangeHandler: laptopPriceInputChangedHandler,
+    inputBlurHandler: laptopPriceInputBlurHandler,
+    inputClasses: laptopPriceInputClasses,
+    onSubmit: enteredLaptopPriceSubmited,
+  } = useInput((value) => patterns.onlyNumbers.test(value), "laptopPrice");
+
+  // Date of purchase
+  const [enteredPurchaseDate, setEnteredPurchaseDate] = useState(
+    localStorage.getItem("purchaseDate") || ""
+  );
+  const [isPurchaseDateTouched, setIsPurchaseDateTouched] = useState(false);
+
+  const purchaseInputClasses =
+    enteredPurchaseDate === "" && isPurchaseDateTouched
+      ? "danger-border"
+      : enteredPurchaseDate !== ""
+      ? "success-border"
+      : null;
+
+  const [enteredMemoryType, setEnteredMemoryType] = useState(
+    localStorage.getItem("memoryType") || ""
+  );
+  const [enteredMemoryTypeTouched, setEnteredMemoryTypeTouched] =
+    useState(false);
+
+  const [enteredLaptopCondition, setEnteredLaptopCondition] = useState(
+    localStorage.getItem("laptopCondition") || ""
+  );
+  const [enteredLaptopConditionTouched, setEnteredLaptopConditionTouched] =
+    useState(false);
+
+  // seletcs
+  const [eachCpuValue, setEachCpuValue] = useState(
+    localStorage.getItem("eachCpuValue") || ""
+  );
+  const [eachBrandsValue, setEachBrandsValue] = useState(
+    localStorage.getItem("eachBrandsValue") || ""
+  );
+
+
+  // navigate
+  const navigate = useNavigate();
 
   // localstorage
   useEffect(() => {
     localStorage.setItem("laptopName", enteredLaptopNameValue);
     localStorage.setItem("cpuCore", enteredCpuCoreValue);
     localStorage.setItem("cpuFrequency", enteredCpuFrequencyValue);
-    localStorage.setItem("laptopRam", enteredLeptopRamValue);
+    localStorage.setItem("laptopRam", enteredLaptopRamValue);
+    localStorage.setItem("laptopPrice", enteredLaptopPriceValue);
+    localStorage.setItem("purchaseDate", enteredPurchaseDate);
+    localStorage.setItem("memoryType", enteredMemoryType);
+    localStorage.setItem("laptopCondition", enteredLaptopCondition);
+    localStorage.setItem("computerImage", image);
+    localStorage.setItem("eachCpuValue", eachCpuValue);
+    localStorage.setItem("eachBrandsValue", eachBrandsValue);
   }, [
+    enteredPurchaseDate,
     enteredLaptopNameValue,
     enteredCpuCoreValue,
     enteredCpuFrequencyValue,
-    enteredLeptopRamValue,
+    enteredLaptopRamValue,
+    enteredLaptopPriceValue,
+    enteredMemoryType,
+    enteredLaptopCondition,
+    image,
+    eachCpuValue,
+    eachBrandsValue,
   ]);
-
-  //  change background color
-  useEffect(() => {
-    document.body.style.backgroundColor = "#F6F6F6";
-  }, []);
 
   // submit Handler
   const submitHandler = (e) => {
     e.preventDefault();
 
     // submited
+    setIsImageTouched(true);
     enteredLaptopNameSubmited(true);
     enteredCpuCoreSubmited(true);
     enteredCpuFrequencySubmited(true);
-    enteredLeptopRamSubmited(true);
+    enteredLaptopRamSubmited(true);
+    enteredLaptopPriceSubmited(true);
+    setIsBrandsTouched(true);
+    setIsCpuTouched(true);
+    setIsPurchaseDateTouched(true);
+    setEnteredLaptopConditionTouched(true);
+    setEnteredMemoryTypeTouched(true);
+
+    
+    if (isFormValid) {
+      navigate("/popup");
+    }
   };
+
+  // image change
+  const onImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        setImage(e.target.result);
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
+
+  // is form valid ?
+  let isFormValid = false;
+
+  if (
+    enteredLaptopNameIsValid &&
+    enteredCpuCoreIsValid &&
+    enteredCpuFrequencyIsValid &&
+    enteredLaptopRamIsValid &&
+    enteredLaptopPriceIsValid &&
+    enteredPurchaseDate !== "" &&
+    image !== null &&
+    eachBrandsValue !== "" &&
+    eachCpuValue !== "" &&
+    enteredLaptopCondition !== "" &&
+    enteredMemoryType !== ""
+  ) {
+    isFormValid = true;
+  }
+
 
   return (
     <>
@@ -107,14 +229,65 @@ const LaptopOptions = () => {
       <Header />
       <section className="section-container">
         <form>
-          <div className={classes["upload-computer-photo"]}>
-            <div>
-              <h4>ჩააგდე ან ატვირთე ლეპტოპის ფოტო</h4>
-              <label htmlFor="computer-photo">
-                <input type="file" id="computer-photo" name="computer-photo" />
-                ატვირთე
-              </label>
-            </div>
+          <div className={classes["about-computer-photo"]}>
+            {image === null ? (
+              <div
+                className={classes["upload-computer-photo"]}
+                id={
+                  image === null && isImageTouched
+                    ? classes["not-valid"]
+                    : image === null
+                    ? classes["valid"]
+                    : null
+                }>
+                {image === null && isImageTouched ? (
+                  <img
+                    src="./assets/images/danger.png"
+                    className={classes.danger}
+                    alt="danger"
+                  />
+                ) : null}
+                <h4
+                  className={
+                    image === null && isImageTouched ? "error-text" : null
+                  }>
+                  ჩააგდე ან ატვირთე ლეპტოპის ფოტო
+                </h4>
+                <label htmlFor="computer-photo">
+                  <input
+                    type="file"
+                    id="computer-photo"
+                    name="computer-photo"
+                    onChange={onImageChange}
+                  />
+                  ატვირთე
+                </label>
+              </div>
+            ) : (
+              <img
+                src={image}
+                alt="uploaded-img"
+                className={classes["uploaded-image"]}
+              />
+            )}
+
+            {image !== null && (
+              <div className={classes["upload-again"]}>
+                <div className={classes.successMsg}>
+                  <img src="./assets/images/success.png" alt="success" />
+                  <h3>სურათი წარმატებით აიტვირთა</h3>
+                </div>
+                <label htmlFor="computer-photo">
+                  <input
+                    type="file"
+                    id="computer-photo"
+                    name="computer-photo"
+                    onChange={onImageChange}
+                  />
+                  ხელახლა ატვირთე
+                </label>
+              </div>
+            )}
           </div>
           <div className="flex-container" id={classes["laptopName-brands"]}>
             <div className={laptopNameInputClasses}>
@@ -127,13 +300,21 @@ const LaptopOptions = () => {
                 onBlur={laptopNameInputBlurHandler}
                 placeholder="HP"
               />
-              <p>ლათინური ასოები, ციფრები, !@#$%^&*_+=</p>
+              <p>ლათინური ასოები, ციფრები, სიმბოლოები</p>
             </div>
-            <LaptopBrands />
+            <LaptopBrands
+              isBrandsTouched={isBrandsTouched}
+              eachBrandsValue={eachBrandsValue}
+              setEachBrandsValue={setEachBrandsValue}
+            />
           </div>
           <div className={classes.border}></div>
           <div className={classes["grid-container"]}>
-            <Cpu />
+            <Cpu
+              isCpuTouched={isCpuTouched}
+              eachCpuValue={eachCpuValue}
+              setEachCpuValue={setEachCpuValue}
+            />
             <div className={cpuCoreInputClasses}>
               <label htmlFor="cpu-core">CPU-ს ბირთვი</label>
               <input
@@ -160,38 +341,76 @@ const LaptopOptions = () => {
             </div>
           </div>
           <div className="flex-container" id={classes.ram}>
-            <div className={leptopRamInputClasses}>
+            <div className={laptopRamInputClasses}>
               <label htmlFor="RAM">ლეპტოპის RAM(GB)</label>
               <input
                 type="text"
                 name="RAM"
-                value={enteredLeptopRamValue}
-                onChange={leptopRamInputChangedHandler}
-                onBlur={leptopRamInputBlurHandler}
+                value={enteredLaptopRamValue}
+                onChange={laptopRamInputChangedHandler}
+                onBlur={laptopRamInputBlurHandler}
                 placeholder="16"
               />
               <p>მხოლოდ ციფრები</p>
             </div>
             <div>
-              <h4>მეხსიერების ტიპი</h4>
-              <Radios firstValue=" SSD" secondValue="HHD" />
+              <div className={classes["danger-radios"]}>
+                {enteredMemoryType === "" && enteredMemoryTypeTouched ? (
+                  <>
+                    <h4 className="error-text">მეხსიერების ტიპი</h4>
+                    <img src="./assets/images/danger.png" alt="danger" />
+                  </>
+                ) : (
+                  <h4>მეხსიერების ტიპი</h4>
+                )}
+              </div>
+              <MemoryTypeRadio
+                enteredMemoryType={enteredMemoryType}
+                setEnteredMemoryType={setEnteredMemoryType}
+              />
             </div>
           </div>
           <div className={classes.border}></div>
           <div className="flex-container" style={{ alignItems: "normal" }}>
             <div className="input-div">
               <label htmlFor="date">შეძენის რიცხვი(არჩევითი)</label>
-              <input type="date" />
+              <input
+                type="date"
+                name="date"
+                className={purchaseInputClasses}
+                value={enteredPurchaseDate}
+                onChange={(e) => setEnteredPurchaseDate(e.target.value)}
+              />
             </div>
-            <div className="input-div" id={classes.price}>
+            <div className={laptopPriceInputClasses} id={classes.price}>
               <label htmlFor="laptop-price">ლეპტოპის ფასი</label>
-              <input type="text" name="laptop-price" placeholder="0000" />
+              <input
+                type="text"
+                name="laptop-price"
+                value={enteredLaptopPriceValue}
+                onChange={laptopPriceInputChangedHandler}
+                onBlur={laptopPriceInputBlurHandler}
+                placeholder="0000"
+              />
               <p>მხოლოდ ციფრები</p>
             </div>
           </div>
           <div className={classes["laptop-condition"]}>
-            <h4>ლეპტოპის მდგომარეობა</h4>
-            <Radios firstValue="ახალი" secondValue="მეორადი" />
+            <div className={classes["danger-radios"]}>
+              {enteredLaptopCondition === "" &&
+              enteredLaptopConditionTouched ? (
+                <>
+                  <h4 className="error-text">ლეპტოპის მდგომარეობა</h4>
+                  <img src="./assets/images/danger.png" alt="danger" />
+                </>
+              ) : (
+                <h4>ლეპტოპის მდგომარეობა</h4>
+              )}
+            </div>
+            <LaptopConditionRadios
+              enteredLaptopCondition={enteredLaptopCondition}
+              setEnteredLaptopCondition={setEnteredLaptopCondition}
+            />
           </div>
           <div className="flex-container">
             <Link to="/employer">
@@ -199,6 +418,7 @@ const LaptopOptions = () => {
                 უკან
               </Button>
             </Link>
+            {/* conditional rendering if form is valid show popup */}
             <MuiButton
               text="დამახსოვრება"
               submitHandler={submitHandler}

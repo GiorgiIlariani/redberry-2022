@@ -5,18 +5,11 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-export default function LaptopBrands() {
+export default function LaptopBrands(props) {
   const [dropdownValues, setDropdownValues] = useState([]);
-  const [eachBrandsValue, setEachBrandsValue] = useState(
-    localStorage.getItem("eachBrandsValue") || ""
-  );
-
-  useEffect(() => {
-    localStorage.setItem("eachBrandsValue", eachBrandsValue);
-  }, [eachBrandsValue]);
 
   const handleChange = (e) => {
-    setEachBrandsValue(e.target.value);
+    props.setEachBrandsValue(e.target.value);
   };
 
   //http request
@@ -31,22 +24,27 @@ export default function LaptopBrands() {
     fetchBrands();
   }, []);
 
+
+  const hasError = props.isBrandsTouched && props.eachBrandsValue === "";
+
   return (
     <>
-      <FormControl sx={{ width: 371, mt: 1 }}>
+      <FormControl sx={{ width: 371, mt: 1 }} error={hasError}>
         <InputLabel id="multiple-brand">აირჩიეთ ბრენდი</InputLabel>
         <Select
           sx={{
             height: "60px",
             borderRadius: "8px",
             backgroundColor: "#EBEBEB",
+            boxShadow: "none",
+            ".MuiOutlinedInput-notchedOutline": { border: 0 },
           }}
           labelId="multiple-brand"
           id="multiple-brand"
           defaultValue=""
-          value={eachBrandsValue}
+          value={props.eachBrandsValue}
           onChange={handleChange}
-          input={<OutlinedInput label="აირჩიეთ ხარისხი" />}>
+          input={<OutlinedInput label="აირჩიეთ ბრენდი" />}>
           {dropdownValues.data !== undefined &&
             dropdownValues.data.map((dropdownValue) => {
               return (

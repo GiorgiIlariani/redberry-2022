@@ -97,10 +97,14 @@ input {
     background-position: calc(100% - 20px);
 }
 
-/* .success-border {
+.success-border {
     border-color: #98E37E;
 }
 
 .danger-border {
     border-color: #b40e0e;
-} */
+}
+
+.selects-border {
+    border: 1px solid #E52F2F !important;
+}
