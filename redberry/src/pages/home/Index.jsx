@@ -43,16 +43,18 @@ const Home = () => {
           ჩანაწერის დამატება
         </Button>
       </Link>
-      <Button
-        className={classes.btn}
-        variant="contained"
-        sx={{
-          mt: "26px",
-          fontSize: "20px",
-        }}
-        disableElevation>
-        ჩანაწერების სია
-      </Button>
+      <Link to="/listOfEntries">
+        <Button
+          className={classes.btn}
+          variant="contained"
+          sx={{
+            mt: "26px",
+            fontSize: "20px",
+          }}
+          disableElevation>
+          ჩანაწერების სია
+        </Button>
+      </Link>
     </div>
   );
 };

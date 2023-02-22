@@ -11,6 +11,10 @@ const Popup = () => {
     document.body.style.backgroundColor = "#F6F6F6";
   }, []);
 
+  useEffect(() => {
+    window.localStorage.clear();
+  });
+
   return (
     <div className={classes.popup}>
       <div className={classes["popup-content"]}>

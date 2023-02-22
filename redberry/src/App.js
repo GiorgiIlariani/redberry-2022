@@ -9,6 +9,7 @@ import Employer from "./pages/employer/Index";
 import LaptopOptions from "./pages/laptop/Index";
 import Popup from "./pages/popup/Popup";
 import ListOfEntries from "./pages/listOfEntries/Index";
+import SingleLeptopInfo from "./pages/singleLaptopInfo/Index";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/laptop-options" element={<LaptopOptions />} />
         <Route path="/popup" element={<Popup />} />
         <Route path="/listOfEntries" element={<ListOfEntries />} />
+        <Route path="/laptop/:id" element={<SingleLeptopInfo />} />
       </Routes>
     </>
   );

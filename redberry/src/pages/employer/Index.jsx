@@ -122,6 +122,8 @@ const Employer = () => {
     if (formIsValid) {
       navigate("/laptop-options");
     }
+
+    
   };
 
   let formIsValid = false;

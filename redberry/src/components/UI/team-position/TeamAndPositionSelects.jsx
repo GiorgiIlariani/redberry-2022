@@ -46,11 +46,14 @@ const TeamAndPositionSelects = (props) => {
 
   let filteredItems = [];
 
+
   if (props.positions.data !== undefined) {
     filteredItems.push(
       props.positions.data.filter((position) => position.team_id === +teamId)
     );
   }
+
+
   return (
     <>
       <FormControl

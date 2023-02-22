@@ -4,3 +4,54 @@
     font-size: 34px;
     font-weight: 700;
 }
+
+.entryList {
+    width: 60%;
+    margin: 100px auto 150px auto; 
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+}
+
+.each-laptop {
+    background: #EAFAFF;
+    padding: 14px;
+    width: 563px;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    border: 1px solid #AED1EA;
+}
+
+
+.each-laptop .laptop-image {
+    width: 266px;
+    height: 178px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+
+.each-laptop div {
+    margin-left: 30px;
+}
+
+.each-laptop h4 {
+    font-size: 18px;
+}
+
+.each-laptop h5 {
+    margin: 18px 0 35px 0;
+    font-size: 18px;
+}
+
+.each-laptop a {
+    color: #4386A9;
+}
+
+
+.error {
+    font-size: 50px;
+    text-align: center;
+    margin-top: 100px;
+}

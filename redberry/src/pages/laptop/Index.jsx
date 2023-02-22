@@ -136,7 +136,6 @@ const LaptopOptions = (props) => {
     localStorage.getItem("eachBrandsValue") || ""
   );
 
-
   // navigate
   const navigate = useNavigate();
 
@@ -184,10 +183,49 @@ const LaptopOptions = (props) => {
     setEnteredLaptopConditionTouched(true);
     setEnteredMemoryTypeTouched(true);
 
-    
-    if (isFormValid) {
-      navigate("/popup");
+    if (!isFormValid) {
+      return;
     }
+
+    const name = localStorage.getItem("name");
+    const surname = localStorage.getItem("surname");
+    const team = localStorage.getItem("team");
+    const mail = localStorage.getItem("mail");
+    const phoneNumber = localStorage.getItem("phoneNumber");
+    const laptopImage = localStorage.getItem("computerImage");
+    const laptopName = localStorage.getItem("laptopName");
+    const laptopBrand = localStorage.getItem("eachBrandsValue");
+    const laptopRam = localStorage.getItem("laptopRam");
+    const laptopMemoryType = localStorage.getItem("memoryType");
+    const laptopCpu = localStorage.getItem("eachCpuValue");
+    const laptopCpuCore = localStorage.getItem("cpuCore");
+    const laptopCpuFrequency = localStorage.getItem("cpuFrequency");
+
+    const laptopInfo = {
+      name,
+      surname,
+      team,
+      mail,
+      phoneNumber,
+      laptopImage,
+      laptopBrand,
+      laptopCpu,
+      laptopCpuCore,
+      laptopCpuFrequency,
+      laptopRam,
+      laptopMemoryType,
+      laptopName,
+    };
+
+    fetch("https://redberry-2022-default-rtdb.firebaseio.com/laptopInfo.json", {
+      method: "POST",
+      body: JSON.stringify(laptopInfo),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    navigate("/popup");
   };
 
   // image change
@@ -219,7 +257,6 @@ const LaptopOptions = (props) => {
   ) {
     isFormValid = true;
   }
-
 
   return (
     <>
@@ -419,11 +456,22 @@ const LaptopOptions = (props) => {
               </Button>
             </Link>
             {/* conditional rendering if form is valid show popup */}
-            <MuiButton
-              text="დამახსოვრება"
-              submitHandler={submitHandler}
-              width="176px"
-            />
+            <Button
+              type="submit"
+              onClick={submitHandler}
+              variant="contained"
+              size="large"
+              sx={{
+                position: "relative",
+                right: 0,
+                mt: "95px",
+                width: "176px",
+                height: "60px",
+                fontSize: "18px",
+              }}
+              disableElevation>
+              დამახსოვრება
+            </Button>
           </div>
         </form>
       </section>
