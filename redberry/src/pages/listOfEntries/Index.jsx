@@ -65,11 +65,7 @@ const ListOfEntries = () => {
             {item.name} {item.surname}
           </h4>
           <h5>{item.laptopName}</h5>
-          <Link
-            style={{ textDecoration: "underline" }}
-            to={`/laptop/${item.id}`}>
-            მეტის ნახვა
-          </Link>
+          <Link to={`/laptop/${item.id}`}>მეტის ნახვა</Link>
         </div>
       </div>
     );
@@ -88,7 +84,7 @@ const ListOfEntries = () => {
   }
 
   return (
-    <>
+    <div className={classes.layout}>
       <Link to="/">
         <BackBtn />
       </Link>
@@ -96,7 +92,7 @@ const ListOfEntries = () => {
       <section className={classes.entryList}>
         {!isLoading && eachLaptop}
       </section>
-    </>
+    </div>
   );
 };
 

@@ -12,3 +12,17 @@
     cursor: pointer;
     border: none;
 }
+
+/* media querys */
+@media (max-width: 1178px) {
+    .backBtn {
+        background: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .backBtn {
+        top: 34px;
+        left: 16px;
+    }
+}

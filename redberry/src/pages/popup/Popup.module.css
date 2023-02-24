@@ -7,7 +7,6 @@
 }
 
 .popup-content {
-    background: #FFFFFF;
     width: 847px;
     height: 537px;
     display: flex;
@@ -18,4 +17,13 @@
 
 .popup-content h2 {
     font-size: 27px;
+}
+
+
+
+@media (max-width: 390px) {
+    .popup-content h2 {
+        margin-bottom: 50px;
+        margin-top: 20px;
+    }
 }

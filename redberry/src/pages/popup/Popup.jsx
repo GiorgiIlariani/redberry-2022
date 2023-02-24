@@ -8,7 +8,7 @@ import classes from "./Popup.module.css";
 const Popup = () => {
   //  change background color
   useEffect(() => {
-    document.body.style.backgroundColor = "#F6F6F6";
+    document.body.style.backgroundColor = "#FFFFFF";
   }, []);
 
   useEffect(() => {

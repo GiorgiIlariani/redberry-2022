@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 // import classes
 import classes from "./Header.module.css";
 
-const Header = () => {
+const Header = ({ formIsValid }) => {
   let activeStyle = {
     color: "#0000ff",
   };
@@ -20,6 +20,7 @@ const Header = () => {
       </NavLink>
       <NavLink
         to="/laptop-options"
+        state={{ formIsValid }}
         style={({ isActive }) => (isActive ? activeStyle : undefined)}>
         <h4>ლეპტოპის მახასიათებლები</h4>
       </NavLink>

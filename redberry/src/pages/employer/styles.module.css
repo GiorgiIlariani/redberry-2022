@@ -2,62 +2,6 @@
     width: 100%;
 }
 
-/* upload photo */
-
-/* .upload-photo {
-    margin-top: 54px;
-    display: flex;
-    align-items: center;
-}
-
-.upload-photo img {
-    margin-left: 10px;
-}
-
-.upload-photo input {
-    display: none;
-}
-
-.upload-photo label {
-    cursor: pointer;
-    background-color: #0E80BF;
-    border-radius: 4px;
-    color: white;
-    padding: 10px 14px;
-    font-size: 14px;
-    margin-left: 20px;
-    font-weight: 500;
-}
-
-.upload-photo span {
-    font-size: 18px;
-    font-weight: 600;
-}
-
-.textarea {
-    margin-top: 50px;
-}
-
-.textarea textarea {
-    display: flex;
-    flex-direction: column;
-    background: #FFFFFF;
-    border: 1px solid #BCBCBC;
-    border-radius: 4px;
-    margin-top: 8px;
-    outline: none;
-    padding: 13px 16px;
-    resize: none;
-    height: 150px;
-    width: 100%;
-    font-size: 18px;
-}
-
-.textarea label {
-    font-weight: 600;
-    font-size: 18px;
-    color: #000000;
-} */
 
 #mail {
     margin-top: 50px;

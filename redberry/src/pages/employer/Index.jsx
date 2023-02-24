@@ -99,7 +99,7 @@ const Employer = () => {
     enteredMailValue,
     enteredPhoneNumberValue,
     eachTeam,
-    eachPosition
+    eachPosition,
   ]);
 
   // change background color
@@ -120,10 +120,8 @@ const Employer = () => {
     setIsPositionTouched(true);
 
     if (formIsValid) {
-      navigate("/laptop-options");
+      navigate("/laptop-options", { state: { formIsValid: formIsValid } });
     }
-
-    
   };
 
   let formIsValid = false;
@@ -143,7 +141,7 @@ const Employer = () => {
       <Link to="/">
         <BackBtn />
       </Link>
-      <Header />
+      <Header formIsValid={formIsValid} />
       <section className="section-container">
         <form className={classes["form-container"]}>
           {/* name and surname  */}
@@ -221,6 +219,7 @@ const Employer = () => {
               submitHandler={submitHandler}
               text="შემდეგი"
               width="176px"
+              // formIsValid={formIsValid}
             />
           </div>
         </form>
@@ -233,14 +232,3 @@ const Employer = () => {
 };
 
 export default Employer;
-
-// // image
-// const onImageChange = (e) => {
-//   if (e.target.files && e.target.files[0]) {
-//     let reader = new FileReader();
-//     reader.onload = (e) => {
-//       setImage(e.target.result);
-//     };
-//     reader.readAsDataURL(e.target.files[0]);
-//   }
-// };

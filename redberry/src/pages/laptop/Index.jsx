@@ -7,7 +7,7 @@ import useInput from "../../hooks/useInput";
 import classes from "./styles.module.css";
 
 //router link
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 // backBtn
 import BackBtn from "../../components/UI/backBtn/BackBtn";
@@ -166,6 +166,9 @@ const LaptopOptions = (props) => {
     eachBrandsValue,
   ]);
 
+  const location = useLocation();
+  let isEmployeeFormValid = location.state.formIsValid;
+
   // submit Handler
   const submitHandler = (e) => {
     e.preventDefault();
@@ -183,49 +186,62 @@ const LaptopOptions = (props) => {
     setEnteredLaptopConditionTouched(true);
     setEnteredMemoryTypeTouched(true);
 
-    if (!isFormValid) {
-      return;
+    //
+    if (isFormValid && isEmployeeFormValid) {
+      const name = localStorage.getItem("name");
+      const surname = localStorage.getItem("surname");
+      const team = localStorage.getItem("team");
+      const mail = localStorage.getItem("mail");
+      const phoneNumber = localStorage.getItem("phoneNumber");
+      const laptopImage = localStorage.getItem("computerImage");
+      const laptopName = localStorage.getItem("laptopName");
+      const laptopBrand = localStorage.getItem("eachBrandsValue");
+      const laptopRam = localStorage.getItem("laptopRam");
+      const laptopMemoryType = localStorage.getItem("memoryType");
+      const laptopCpu = localStorage.getItem("eachCpuValue");
+      const laptopCpuCore = localStorage.getItem("cpuCore");
+      const laptopCpuFrequency = localStorage.getItem("cpuFrequency");
+      const laptopCondition = localStorage.getItem("laptopCondition");
+      const purchaseDate = localStorage.getItem("purchaseDate");
+      const laptopPrice = localStorage.getItem("laptopPrice");
+
+      const laptopInfo = {
+        id: Math.random(),
+        name,
+        surname,
+        team,
+        mail,
+        phoneNumber,
+        laptopImage,
+        laptopBrand,
+        laptopCpu,
+        laptopCpuCore,
+        laptopCpuFrequency,
+        laptopRam,
+        laptopMemoryType,
+        laptopName,
+        laptopCondition,
+        purchaseDate,
+        laptopPrice,
+      };
+
+      fetch(
+        "https://redberry-2022-default-rtdb.firebaseio.com/laptopInfo.json",
+        {
+          method: "POST",
+          body: JSON.stringify(laptopInfo),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      navigate("/popup");
     }
 
-    const name = localStorage.getItem("name");
-    const surname = localStorage.getItem("surname");
-    const team = localStorage.getItem("team");
-    const mail = localStorage.getItem("mail");
-    const phoneNumber = localStorage.getItem("phoneNumber");
-    const laptopImage = localStorage.getItem("computerImage");
-    const laptopName = localStorage.getItem("laptopName");
-    const laptopBrand = localStorage.getItem("eachBrandsValue");
-    const laptopRam = localStorage.getItem("laptopRam");
-    const laptopMemoryType = localStorage.getItem("memoryType");
-    const laptopCpu = localStorage.getItem("eachCpuValue");
-    const laptopCpuCore = localStorage.getItem("cpuCore");
-    const laptopCpuFrequency = localStorage.getItem("cpuFrequency");
-
-    const laptopInfo = {
-      name,
-      surname,
-      team,
-      mail,
-      phoneNumber,
-      laptopImage,
-      laptopBrand,
-      laptopCpu,
-      laptopCpuCore,
-      laptopCpuFrequency,
-      laptopRam,
-      laptopMemoryType,
-      laptopName,
-    };
-
-    fetch("https://redberry-2022-default-rtdb.firebaseio.com/laptopInfo.json", {
-      method: "POST",
-      body: JSON.stringify(laptopInfo),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    navigate("/popup");
+    if (isFormValid && !isEmployeeFormValid) {
+      alert("make sure u fill everything on employee page");
+    }
   };
 
   // image change
