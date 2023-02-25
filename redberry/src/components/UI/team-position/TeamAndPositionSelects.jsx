@@ -6,7 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 const TeamAndPositionSelects = (props) => {
-  const [teamId, setTeamId] = useState("");
+  const [teamId, setTeamId] = useState(localStorage.getItem("teamId") || "");
 
   useEffect(() => {
     const fetchTeams = async () => {
@@ -28,6 +28,10 @@ const TeamAndPositionSelects = (props) => {
     fetchPosiions();
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("teamId", teamId);
+  }, [teamId]);
+
   const handleTeamChange = (e) => {
     props.setEachTeam(e.target.value);
   };
@@ -46,13 +50,11 @@ const TeamAndPositionSelects = (props) => {
 
   let filteredItems = [];
 
-
   if (props.positions.data !== undefined) {
     filteredItems.push(
       props.positions.data.filter((position) => position.team_id === +teamId)
     );
   }
-
 
   return (
     <>

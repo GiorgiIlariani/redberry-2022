@@ -31,6 +31,9 @@ const patterns = {
 };
 
 const LaptopOptions = (props) => {
+  // for responsive design
+  const [laptopPage, setLaptopPage] = useState(false);
+
   //  change background color
   useEffect(() => {
     document.body.style.backgroundColor = "#F6F6F6";
@@ -204,6 +207,7 @@ const LaptopOptions = (props) => {
       const laptopCondition = localStorage.getItem("laptopCondition");
       const purchaseDate = localStorage.getItem("purchaseDate");
       const laptopPrice = localStorage.getItem("laptopPrice");
+      const position = localStorage.getItem("position");
 
       const laptopInfo = {
         id: Math.random(),
@@ -223,6 +227,7 @@ const LaptopOptions = (props) => {
         laptopCondition,
         purchaseDate,
         laptopPrice,
+        position,
       };
 
       fetch(
@@ -279,9 +284,9 @@ const LaptopOptions = (props) => {
       <Link to="/">
         <BackBtn />
       </Link>
-      <Header />
+      <Header laptopPage={laptopPage} setLaptopPage={setLaptopPage} />
       <section className="section-container">
-        <form>
+        <form className={classes["form-container"]}>
           <div className={classes["about-computer-photo"]}>
             {image === null ? (
               <div
@@ -306,7 +311,7 @@ const LaptopOptions = (props) => {
                   }>
                   ჩააგდე ან ატვირთე ლეპტოპის ფოტო
                 </h4>
-                <label htmlFor="computer-photo">
+                <label htmlFor="computer-photo" >
                   <input
                     type="file"
                     id="computer-photo"
@@ -342,8 +347,12 @@ const LaptopOptions = (props) => {
               </div>
             )}
           </div>
-          <div className="flex-container" id={classes["laptopName-brands"]}>
-            <div className={laptopNameInputClasses}>
+          <div
+            className={`${classes["selects-grid-container"]} ${classes["not-aligned"]}`}
+            id={classes["laptopName-brands"]}>
+            <div
+              className={laptopNameInputClasses}
+              id={classes["bottom-margin"]}>
               <label htmlFor="laptopName">ლეპტოპის სახელი</label>
               <input
                 type="text"
@@ -355,6 +364,7 @@ const LaptopOptions = (props) => {
               />
               <p>ლათინური ასოები, ციფრები, სიმბოლოები</p>
             </div>
+
             <LaptopBrands
               isBrandsTouched={isBrandsTouched}
               eachBrandsValue={eachBrandsValue}
@@ -368,7 +378,7 @@ const LaptopOptions = (props) => {
               eachCpuValue={eachCpuValue}
               setEachCpuValue={setEachCpuValue}
             />
-            <div className={cpuCoreInputClasses}>
+            <div className={cpuCoreInputClasses} id={classes.responsive}>
               <label htmlFor="cpu-core">CPU-ს ბირთვი</label>
               <input
                 type="text"
@@ -380,7 +390,7 @@ const LaptopOptions = (props) => {
               />
               <p>მხოლოდ ციფრები</p>
             </div>
-            <div className={cpuFrequencyInputClasses}>
+            <div className={cpuFrequencyInputClasses} id={classes.responsive}>
               <label htmlFor="cpuFrequency">CPU-ს ნაკადი</label>
               <input
                 type="text"
@@ -393,7 +403,7 @@ const LaptopOptions = (props) => {
               <p>მხოლოდ ციფრები</p>
             </div>
           </div>
-          <div className="flex-container" id={classes.ram}>
+          <div className="flex-container not-aligned" id={classes.ram}>
             <div className={laptopRamInputClasses}>
               <label htmlFor="RAM">ლეპტოპის RAM(GB)</label>
               <input
@@ -407,7 +417,7 @@ const LaptopOptions = (props) => {
               <p>მხოლოდ ციფრები</p>
             </div>
             <div>
-              <div className={classes["danger-radios"]}>
+              <div className={classes["danger-radios"]} id="responsive">
                 {enteredMemoryType === "" && enteredMemoryTypeTouched ? (
                   <>
                     <h4 className="error-text">მეხსიერების ტიპი</h4>
@@ -435,7 +445,7 @@ const LaptopOptions = (props) => {
                 onChange={(e) => setEnteredPurchaseDate(e.target.value)}
               />
             </div>
-            <div className={laptopPriceInputClasses} id={classes.price}>
+            <div className={laptopPriceInputClasses} id={`${classes.price}`}>
               <label htmlFor="laptop-price">ლეპტოპის ფასი</label>
               <input
                 type="text"
@@ -465,7 +475,7 @@ const LaptopOptions = (props) => {
               setEnteredLaptopCondition={setEnteredLaptopCondition}
             />
           </div>
-          <div className="flex-container">
+          <div className={classes["buttons-flex-container"]}>
             <Link to="/employer">
               <Button variant="text" sx={{ mt: "95px" }} size="large">
                 უკან

@@ -1,4 +1,9 @@
- .upload-computer-photo {
+.form-container {
+    width: 100%;
+}
+
+
+.upload-computer-photo {
     width: 100%;
     height: 423px;
     border-radius: 18px;
@@ -6,6 +11,8 @@
     flex-direction: column;
     align-items: center;
 }
+
+
 
 .about-computer-photo input {
     display: none;
@@ -29,6 +36,7 @@
 }
 
 
+
 #valid {
     background: #F6F6F6;
     border: 2px dashed #4386A9;
@@ -46,6 +54,14 @@
 #not-valid h4 {
     color: #E52F2F;
 }
+
+.selects-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    column-gap: 30px;
+}
+
 
 
 
@@ -68,6 +84,8 @@
     object-fit: cover;
     border-radius: 18px;
 }
+
+
 
 .successMsg h3 {
     margin-left: 10px;
@@ -96,6 +114,13 @@
     grid-template-columns: repeat(3, 1fr);
     column-gap: 24px;
     align-items: center;
+}
+
+
+.buttons-flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 #ram {
@@ -137,4 +162,96 @@
     display: flex;
     justify-content: center;
     margin: 67px 0 45px 0;
+}
+
+@media (max-width: 1800px) {
+    .selects-grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    #price {
+        margin-top: 30px;
+    }
+    
+    #bottom-margin {
+        margin-bottom: 30px;
+    }
+
+}
+
+
+@media (max-width: 1400px) {
+    .upload-again {
+        flex-direction: column;
+    }
+
+    .upload-again .successMsg {
+        margin-bottom: 30px;
+    }
+
+}
+
+@media (max-width: 900px) {
+    .uploaded-image {
+        height: 350px;
+    }
+
+    .upload-computer-photo {
+        height: 350px;
+    }
+
+    .about-computer-photo h4{
+        font-size: 16px;
+        margin-top: 50px;
+    }
+
+
+}
+
+
+@media (max-width: 600px) {
+    .uploaded-image {
+        height: 300px;
+    }
+
+    .upload-computer-photo {
+        height: 250px;
+    }
+
+    .upload-again label {
+        padding: 15px 50px;
+        font-size: 16px;
+    }
+
+    .upload-again h3 {
+        font-size: 18px;
+    }
+    .about-computer-photo h4 {
+        width: 60%;
+    }
+    .about-computer-photo label {
+        padding: 16px 45px;
+    }
+
+    
+}
+
+@media (max-width: 1200px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+
+}
+
+@media (max-width: 500px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+    #responsive {
+        margin-top: 30px;
+    }
+    
+
 }

@@ -63,7 +63,7 @@ input {
     margin: 0 auto;
     background: #FFFFFF;
     margin-top: 42px;
-    padding: 96px 174px 44px 174px;
+    padding: 5% 10%;
     border-radius: 18px;
 }
 
@@ -109,4 +109,37 @@ input {
 
 .selects-border {
     border: 1px solid #E52F2F !important;
+}
+
+
+/* generak media querys */
+@media (max-width: 1800px) {
+    .flex-container {
+        flex-direction: column;
+    }
+
+    .flex-container .input-div {
+        width: 100%;
+    }
+
+    .flex-container #responsive {
+        margin-top: 30px;
+    }
+
+    .not-aligned {
+        align-items: normal;
+    }
+
+    .flex-container > div {
+        width: auto;
+    }
+}
+
+
+
+
+@media (max-width: 1000px) {
+    .section-container {
+        width: 90%;
+    }
 }

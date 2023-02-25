@@ -30,6 +30,9 @@ const patterns = {
 };
 
 const Employer = () => {
+  // for responsive design
+  const [employerPage, setEmployerPage] = useState(false);
+
   // name validation
   const {
     value: enteredNameValue,
@@ -141,11 +144,15 @@ const Employer = () => {
       <Link to="/">
         <BackBtn />
       </Link>
-      <Header formIsValid={formIsValid} />
+      <Header
+        formIsValid={formIsValid}
+        employerPage={employerPage}
+        setEmployerPage={setEmployerPage}
+      />
       <section className="section-container">
         <form className={classes["form-container"]}>
           {/* name and surname  */}
-          <div className="flex-container ">
+          <div className="flex-container">
             <div className={nameInputClasses}>
               <label htmlFor="name">სახელი</label>
               <input
@@ -159,7 +166,7 @@ const Employer = () => {
               />
               <p>მინიმუმ ორი სიმბოლო, ქართული ასოები</p>
             </div>
-            <div className={surnameInputClasses}>
+            <div className={surnameInputClasses} id="responsive">
               <label htmlFor="surname">გვარი</label>
               <input
                 type="text"
@@ -219,7 +226,6 @@ const Employer = () => {
               submitHandler={submitHandler}
               text="შემდეგი"
               width="176px"
-              // formIsValid={formIsValid}
             />
           </div>
         </form>

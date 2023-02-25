@@ -22,5 +22,15 @@
     margin: 67px 0 45px 0;
 }
 
+/* mediaQuery */
+@media (max-width: 400px) {
+    #mail {
+        margin-top: -20px;
+    }
+}
+
+
+
+
 
 

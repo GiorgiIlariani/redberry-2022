@@ -11,11 +11,38 @@
     cursor: pointer;
 }
 
-
-
-
 .header a {
     color: black;
 }
 
+.laptopResponsive {
+    display: block;
+}
+
+.page {
+    text-align: center;
+    color: #898989;
+    margin: 10px 0 0 0;
+    font-size: 24px;
+    display: none;
+}
+
+
+/* media querys */
+@media (max-width: 1000px) {
+    .laptopResponsive {
+        display: none;
+    }
+
+    .employerResponsive {
+        color: #000;
+    }
+
+    .page {
+        display: block;
+    }
+    .header {
+        margin-top: -40px;
+    }
+}
 

@@ -62,7 +62,7 @@ const SingleLaptopInfo = () => {
                       {data.name} {data.surname}
                     </li>
                     <li>{data.team}</li>
-                    <li>პოზიცია</li>
+                    <li>{data.position}</li>
                     <li>{data.mail}</li>
                     <li>{data.phoneNumber}</li>
                   </ul>

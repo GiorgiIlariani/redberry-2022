@@ -29,7 +29,7 @@ export default function LaptopBrands(props) {
 
   return (
     <>
-      <FormControl sx={{ width: 371, mt: 1 }} error={hasError}>
+      <FormControl sx={{ mt: 1 }} error={hasError}>
         <InputLabel id="multiple-brand">აირჩიეთ ბრენდი</InputLabel>
         <Select
           sx={{
